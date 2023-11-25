@@ -5,11 +5,6 @@
              StartupUri="Views/Windows/Login.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Colors/Buttons/ButtonColors.xaml"/>
-                <ResourceDictionary Source="Resources/Colors/TextBoxes/OutlinedTextBox.xaml"/>
-                <ResourceDictionary Source="Resources/Styles/TextBoxes/OutlinedTextBox.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
