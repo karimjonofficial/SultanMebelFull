@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:SultanMebel.WPF.Views.Windows"
         mc:Ignorable="d"
         Title="Login"
-        Height="600"
-        Width="800">
+        Height="300"
+        Width="400"
+        Background="AliceBlue">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -19,28 +20,59 @@
         
     </Window.Resources>
     <Grid>
-        <TextBox Width="300"
-                 Style="{DynamicResource OutlinedTextBox}"
-                 Height="32"
-                 FontSize="14"
-                 VerticalContentAlignment="Center"/>
-        <TextBox Width="300"
-                 Style="{DynamicResource OutlinedTextBox}"
-                 Height="32"
-                 FontSize="14"
-                 VerticalContentAlignment="Center"
-                 Margin="0 80 0 0"/>
-        <StackPanel Orientation="Horizontal"
-                    VerticalAlignment="Bottom"
-                    HorizontalAlignment="Right"
-                    Margin="25">
-            <Button Style="{DynamicResource PrimaryButton}" Width="150"
-                    Height="40"
-                    Content="Kirish"
-                    Margin="0 0 10 0"/>
-            <Button Style="{DynamicResource SecondaryButton}" Width="150"
-                    Height="40"
-                    Content="Chiqish"/>
-        </StackPanel>
+        <Border VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Width="500"
+                Height="400"
+                CornerRadius="20"
+                Background="White">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0" Direction="0" Opacity=".2"/>
+            </Border.Effect>
+            <Grid Margin="10"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Foydalanuvchi nomi va parolni kiriting:"
+                           FontSize="18"
+                           HorizontalAlignment="Center"
+                           FontWeight="Medium"
+                           Margin="-15 0 0 20"/>
+                    <TextBox Style="{DynamicResource OutlinedTextBox}"
+                        Height="32"
+                        FontSize="14"
+                         Margin="0 0 0 10"/>
+                    <TextBox Style="{DynamicResource OutlinedTextBox}"
+                        Height="32"
+                        FontSize="14"
+                        VerticalContentAlignment="Center"/>
+                </StackPanel>
+                <Border Grid.Row="1"
+                        Margin="20 20 20 10"
+                        Background="#44666666"
+                        Height="2"
+                        BorderThickness="0"
+                        CornerRadius="2"/>
+                <StackPanel Orientation="Horizontal"
+                        FlowDirection="RightToLeft"
+                        Grid.Row="2"
+                        Margin="20 0">
+                    <Button Style="{DynamicResource SecondaryButton}"
+                        Width="80"
+                        Height="40"
+                        Content="Chiqish"/>
+                    <Button Style="{DynamicResource PrimaryButton}"
+                        Width="80"
+                        Height="40"
+                        Content="Kirish"
+                        Margin="10 0 0 0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

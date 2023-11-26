@@ -3,6 +3,8 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../../Colors/TextBoxes/OutlinedTextBox.xaml"/>
     </ResourceDictionary.MergedDictionaries>
+    <BackEase Amplitude="2" EasingMode="EaseOut" x:Key="ease_out"/>
+    <BackEase Amplitude="2" EasingMode="EaseOut" x:Key="ease_in"/>
     <Style x:Key="OutlinedTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{DynamicResource TextBox.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource TextBox.Static.Border}"/>
@@ -28,23 +30,71 @@
                                   Focusable="false"
                                   HorizontalScrollBarVisibility="Hidden"
                                   VerticalScrollBarVisibility="Hidden"/>
+                        <Border.Effect>
+                            <DropShadowEffect x:Name="shadow"
+                                              BlurRadius="0"
+                                              ShadowDepth="0"
+                                              Direction="270"
+                                              Opacity="0.1"/>
+                        </Border.Effect>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                        <Trigger Property="IsEnabled"
+                                 Value="false">
+                            <Setter Property="Opacity"
+                                    TargetName="border" Value="0.56"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource TextBox.MouseOver.Border}"/>
-                            <Setter Property="Background" TargetName="border" Value="{DynamicResource TextBox.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush"
+                                    TargetName="border"
+                                    Value="{DynamicResource TextBox.MouseOver.Border}"/>
+                            <Setter Property="Background"
+                                    TargetName="border"
+                                    Value="{DynamicResource TextBox.MouseOver.Background}"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource TextBox.Focus.Border}"/>
-                            <Setter Property="Background" TargetName="border" Value="{DynamicResource TextBox.Focus.Background}"/>
-                            <Setter Property="Effect">
-                                <Setter.Value>
-                                    <DropShadowEffect BlurRadius="8" ShadowDepth="1" Direction="270" Opacity=".1"/>
-                                </Setter.Value>
-                            </Setter>
+                            <Setter Property="BorderBrush"
+                                    TargetName="border"
+                                    Value="{DynamicResource TextBox.Focus.Border}"/>
+                            <Setter Property="Background"
+                                    TargetName="border"
+                                    Value="{DynamicResource TextBox.Focus.Background}"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="put_shadow">
+                                    <Storyboard >
+                                        <DoubleAnimation
+                                            EasingFunction="{StaticResource ease_out}"
+                                            Duration="0:0:.4"
+                                            To="8"
+                                            Storyboard.TargetName="shadow"
+                                            Storyboard.TargetProperty="BlurRadius"/>
+                                        <DoubleAnimation
+                                            EasingFunction="{StaticResource ease_out}"
+                                            Duration="0:0:.4"
+                                            To="1"
+                                            Storyboard.TargetName="shadow"
+                                            Storyboard.TargetProperty="ShadowDepth"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard x:Name="remove_shadow">
+                                    <Storyboard >
+                                        <DoubleAnimation
+                                            EasingFunction="{StaticResource ease_in}"
+                                            Duration="0:0:.4"
+                                            To="0"
+                                            Storyboard.TargetName="shadow"
+                                            Storyboard.TargetProperty="BlurRadius"/>
+                                        <DoubleAnimation
+                                            EasingFunction="{StaticResource ease_in}"
+                                            Duration="0:0:.4"
+                                            To="0"
+                                            Storyboard.TargetName="shadow"
+                                            Storyboard.TargetProperty="ShadowDepth"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -53,10 +103,13 @@
         <Style.Triggers>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
-                    <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
-                    <Condition Property="IsSelectionActive" Value="false"/>
+                    <Condition Property="IsInactiveSelectionHighlightEnabled"
+                               Value="true"/>
+                    <Condition Property="IsSelectionActive"
+                               Value="false"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                <Setter Property="SelectionBrush"
+                        Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
             </MultiTrigger>
         </Style.Triggers>
     </Style>
